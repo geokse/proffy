@@ -38,6 +38,11 @@ const styles = StyleSheet.create( {
         marginBottom: 16,
     },
 
+    select: {
+        backgroundColor: '#fff',
+        justifyContent: 'center',
+    },
+
     submitButton:{
         backgroundColor: '#04d361',
         flexDirection: 'row',

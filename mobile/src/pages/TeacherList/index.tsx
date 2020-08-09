@@ -69,10 +69,11 @@ function TeacherList() {
                             style={styles.input}
                             selectedValue={subject}
                             onValueChange={text => setSubject(String(text))}
-                            itemStyle={{color: '#c1bccc'}}
+                            itemStyle={{ color: '#c1bccc' }}
+                            prompt="Qual matéria?"
                         >
 
-                            <Picker.Item value='Artes' label='Artes'  />
+                            <Picker.Item value='Artes' label='Artes' />
                             <Picker.Item value='Biologia' label='Biologia' />
                             <Picker.Item value='Ciências' label='Ciências' />
                             <Picker.Item value='Educação física' label='Educação física' />
@@ -82,18 +83,35 @@ function TeacherList() {
                             <Picker.Item value='Matemática' label='Matemática' />
                             <Picker.Item value='Português' label='Português' />
                             <Picker.Item value='Química' label='Química' />
-
                         </Picker>
+
+
+
                         <View style={styles.inputGroup}>
                             <View style={styles.inputBlock}>
                                 <Text style={styles.label}>Dia da semana</Text>
-                                <TextInput
-                                    style={styles.input}
-                                    value={week_day}
-                                    onChangeText={text => setWeekDay(text)}
-                                    placeholder="Qual o dia?"
-                                    placeholderTextColor='#c1bccc'
-                                />
+
+                                <View style={styles.input}>
+                                    <Picker
+                                        style={styles.select}
+                                        selectedValue={week_day}
+                                        onValueChange={text => setWeekDay(String(text))}
+                                        itemStyle={{ color: '#c1bccc' }}
+                                        prompt="Qual dia da semana?"
+                                        pl
+                                        mode="dropdown"
+
+                                    >
+                                        <Picker.Item value='0' label='Domingo' />
+                                        <Picker.Item value='1' label='Segunda-feira' />
+                                        <Picker.Item value='2' label='Terça-feira' />
+                                        <Picker.Item value='3' label='Quarta-feira' />
+                                        <Picker.Item value='4' label='Quinta-feira' />
+                                        <Picker.Item value='5' label='Sexta-feira' />
+                                        <Picker.Item value='6' label='Sabado' />
+                                    </Picker>
+                                </View>
+
                             </View>
                             <View style={styles.inputBlock}>
                                 <Text style={styles.label}>Horário</Text>
