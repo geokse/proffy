@@ -16,8 +16,8 @@ function TeacherList() {
     const [favorites, setFavorites] = useState<number[]>([]);
 
     const [teachers, setTeachers] = useState([]);
-    const [subject, setSubject] = useState('');
-    const [week_day, setWeekDay] = useState('');
+    const [subject, setSubject] = useState('Artes');
+    const [week_day, setWeekDay] = useState('0');
     const [time, setTime] = useState('');
 
     function loadFavorites() {
@@ -40,16 +40,25 @@ function TeacherList() {
 
     async function handleFiltersSubmit() {
         loadFavorites();
-        const response = await api.get('classes', {
-            params: {
-                subject,
-                week_day,
-                time
-            }
-        });
 
-        setIiFiltersVisible(false);
-        setTeachers(response.data);
+        try {
+            const response = await api.get('classes', {
+                params: {
+                    subject,
+                    week_day,
+                    time
+                }
+            });
+
+            setIiFiltersVisible(false);
+            setTeachers(response.data);
+        } catch (error) {
+            console.log(subject);
+            console.log(week_day);
+            console.log(time);
+            console.log(error);
+        }
+
     }
 
     return (
@@ -65,25 +74,28 @@ function TeacherList() {
                 {isFiltersVisible && (
                     <View style={styles.searchForm}>
                         <Text style={styles.label}>Matéria</Text>
-                        <Picker
-                            style={styles.input}
-                            selectedValue={subject}
-                            onValueChange={text => setSubject(String(text))}
-                            itemStyle={{ color: '#c1bccc' }}
-                            prompt="Qual matéria?"
-                        >
+                        <View style={styles.input}>
+                            <Picker
+                                style={styles.select}
+                                selectedValue={subject}
+                                onValueChange={text => setSubject(String(text))}
+                                itemStyle={{ color: '#c1bccc' }}
+                                prompt="Qual matéria?"
+                            >
 
-                            <Picker.Item value='Artes' label='Artes' />
-                            <Picker.Item value='Biologia' label='Biologia' />
-                            <Picker.Item value='Ciências' label='Ciências' />
-                            <Picker.Item value='Educação física' label='Educação física' />
-                            <Picker.Item value='Física' label='Física' />
-                            <Picker.Item value='Geografia' label='Geografia' />
-                            <Picker.Item value='História' label='História' />
-                            <Picker.Item value='Matemática' label='Matemática' />
-                            <Picker.Item value='Português' label='Português' />
-                            <Picker.Item value='Química' label='Química' />
-                        </Picker>
+                                <Picker.Item value='Artes' label='Artes' />
+                                <Picker.Item value='Biologia' label='Biologia' />
+                                <Picker.Item value='Ciências' label='Ciências' />
+                                <Picker.Item value='Educação física' label='Educação física' />
+                                <Picker.Item value='Física' label='Física' />
+                                <Picker.Item value='Geografia' label='Geografia' />
+                                <Picker.Item value='História' label='História' />
+                                <Picker.Item value='Matemática' label='Matemática' />
+                                <Picker.Item value='Português' label='Português' />
+                                <Picker.Item value='Química' label='Química' />
+                            </Picker>
+                        </View>
+
 
 
 
@@ -98,9 +110,7 @@ function TeacherList() {
                                         onValueChange={text => setWeekDay(String(text))}
                                         itemStyle={{ color: '#c1bccc' }}
                                         prompt="Qual dia da semana?"
-                                        pl
                                         mode="dropdown"
-
                                     >
                                         <Picker.Item value='0' label='Domingo' />
                                         <Picker.Item value='1' label='Segunda-feira' />
