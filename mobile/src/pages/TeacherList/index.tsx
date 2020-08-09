@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text } from 'react-native';
 import { ScrollView, TextInput, BorderlessButton, RectButton } from 'react-native-gesture-handler';
+import { Picker } from '@react-native-community/picker';
 import AsyncStorage from '@react-native-community/async-storage';
 import { Feather } from '@expo/vector-icons';
 import PageHeader from '../../components/PageHeader';
@@ -64,14 +65,25 @@ function TeacherList() {
                 {isFiltersVisible && (
                     <View style={styles.searchForm}>
                         <Text style={styles.label}>Matéria</Text>
-                        <TextInput
+                        <Picker
                             style={styles.input}
-                            value={subject}
-                            onChangeText={text => setSubject(text)}
-                            placeholder="Qual é a matéria?"
-                            placeholderTextColor='#c1bccc'
-                        />
+                            selectedValue={subject}
+                            onValueChange={text => setSubject(String(text))}
+                            itemStyle={{color: '#c1bccc'}}
+                        >
 
+                            <Picker.Item value='Artes' label='Artes'  />
+                            <Picker.Item value='Biologia' label='Biologia' />
+                            <Picker.Item value='Ciências' label='Ciências' />
+                            <Picker.Item value='Educação física' label='Educação física' />
+                            <Picker.Item value='Física' label='Física' />
+                            <Picker.Item value='Geografia' label='Geografia' />
+                            <Picker.Item value='História' label='História' />
+                            <Picker.Item value='Matemática' label='Matemática' />
+                            <Picker.Item value='Português' label='Português' />
+                            <Picker.Item value='Química' label='Química' />
+
+                        </Picker>
                         <View style={styles.inputGroup}>
                             <View style={styles.inputBlock}>
                                 <Text style={styles.label}>Dia da semana</Text>

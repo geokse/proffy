@@ -8,9 +8,6 @@ export default class ConnectionsController {
         const totalConnections = await db('connections').count('* as total');
 
         const {total} = totalConnections[0];
-        
-        console.log('entrou');
-        
         return response.json({ total }); 
     }
 
